@@ -1,0 +1,6 @@
+apiVersion: v2
+name: keda-demo
+description: Nginx workload with KEDA cron scaler (0 → 3 → 0 replicas on schedule)
+type: application
+version: 0.1.0
+appVersion: "1.25"

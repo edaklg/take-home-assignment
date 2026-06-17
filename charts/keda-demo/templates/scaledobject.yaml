@@ -1,0 +1,18 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: {{ include "keda-demo.fullname" . }}
+  labels:
+    {{- include "keda-demo.labels" . | nindent 4 }}
+spec:
+  scaleTargetRef:
+    name: {{ include "keda-demo.fullname" . }}
+  minReplicaCount: {{ .Values.scaler.minReplicaCount }}
+  maxReplicaCount: {{ .Values.scaler.maxReplicaCount }}
+  triggers:
+    - type: cron
+      metadata:
+        timezone: {{ .Values.scaler.timezone | quote }}
+        start: {{ .Values.scaler.start | quote }}
+        end:   {{ .Values.scaler.end | quote }}
+        desiredReplicas: {{ .Values.scaler.desiredReplicas | quote }}
